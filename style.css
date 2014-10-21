@@ -13,3 +13,9 @@ body {
 footer {
   padding: 30px 0;
 }
+.img-member {
+  width: 100px;
+  height: 100px;
+  float: right;
+  margin-left: 5px;
+}
