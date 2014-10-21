@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,7 +36,7 @@
           <a class="navbar-brand" href="#home">Jackalope Science, Inc.</a>
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav" role="tablist">
+          <ul class="nav navbar-nav" role="tablist" id="navlist">
             <li class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
             <li><a href="#news" role="tab" data-toggle="tab">News</a></li>
             <li class="dropdown">
@@ -55,7 +54,7 @@
     </div><!-- /.navbar -->
 
     <div class="container">
-      <div class="tab-content">
+      <div class="tab-content" id="pagetabs">
         
         <!-- HOME Tab -->
         <div class="tab-pane active" id="home">
@@ -76,7 +75,7 @@
           <div class="row">
             <div class="col-6 col-sm-6 col-lg-6">
               <h2>Tenets</h2>
-              <p>Our mission is captured in four tenets:</p>
+              <p>Our mission is captured in four philosophies:</p>
               <b>Robotics</b>
               <p>Use of exciting technology to inspire young people to pursue STEM and provide them with teamwork and leadership skills</p>
               <b>Diversity</b>
@@ -85,12 +84,12 @@
               <p>Enable young people to foster their inventiveness and creativity with the appropriate tools and guidance</p>
               <b>Safety</b>
               <p>Train our own participants and the community at large on safety and why it matters</p>
-              <p><a class="btn btn-default" href="#" role="button">Learn More &raquo;</a></p>
+              <p><a class="btn btn-default" href="#tenets" role="button" data-toggle="tab">Learn More &raquo;</a></p>
             </div><!--/span-->
             <div class="col-6 col-sm-6 col-lg-6">
               <h2>News</h2>
-              <p> </p>
-              <p><a class="btn btn-default" href="#" role="button">Read More &raquo;</a></p>
+              <p>The Bit Buckets are working on their trebuchet for the 2014 Pumpkin Toss on the University of Arizona mall!</p>
+              <p><a class="btn btn-default" href="#news" role="button" data-toggle="tab">Read More &raquo;</a></p>
             </div><!--/span-->
           </div><!--/row-->
         </div><!-- tab home-->
@@ -151,7 +150,35 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+      
+    <script>
+      // Load correct tab on page load
+      $(function() {
+        if(window.location.hash) {
+          $('#navlist a[href='+window.location.hash+']').tab('show');
+          window.scrollTo(0,0);
+        }
+      });
+      
+      // Load a tab when targetted from another element
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        toaddr = e.target.href;
+        toanchor = toaddr.substring(toaddr.indexOf('#')+1);
+        
+        if(toanchor == -1)
+          return;
+        
+        $('#navlist').find('li').each(function() {
+          $(this).removeClass("active");
+        });
+        
+        $.each($('a[href=#'+toanchor+']').parent(), function(i, val) {
+          if($(val)[0].tagName == 'LI') {
+            $(val).addClass("active");
+          }
+        });
 
-    <script src="offcanvas.js"></script>
+      });
+    </script>
   </body>
 </html>
