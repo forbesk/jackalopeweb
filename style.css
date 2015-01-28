@@ -19,3 +19,11 @@ footer {
   float: right;
   margin-left: 5px;
 }
+.img-left {
+  float: left;
+  margin-right: 5px;
+}
+.img-right {
+  float:right;
+  margin-left: 5px;
+}
